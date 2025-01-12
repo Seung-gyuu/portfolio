@@ -96,7 +96,8 @@ function startImageTransition() {
     const images = document.getElementsByClassName("images");
     const svg = document.querySelector(".home_blob");
     let curIndex = 0;
-
+ 
+    images[curIndex].style.opacity = 1;
     setInterval(changeImage, 5000);
 
     function changeImage() {
@@ -193,3 +194,28 @@ themebutton.addEventListener('click', () => {
     localStorage.setItem('selected-theme', getCurrentTheme())
     localStorage.setItem('selected-icon', getCurrentIcon())
 })
+
+function play_video() {
+    var thumbnail = document.getElementById('demo-thumbnail');
+    var video = document.getElementById('demo-video');
+
+    // 이미지 숨기고 비디오 보여주기
+    thumbnail.style.display = 'none';
+    video.style.display = 'block';
+    video.play();
+}
+
+
+let shakeBox = document.querySelector('.shakeBox');
+
+const observer = new IntersectionObserver(
+  ([entry]) => {
+    shakeBox.style.animationName = entry.isIntersecting ? "shake" : "none";
+  },
+  {
+    rootMargin: "-250px 0px",
+    threshold: 1,
+  }
+);
+
+observer.observe(shakeBox)

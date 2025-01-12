@@ -261,6 +261,50 @@ img {
     color: var(--first-color);
 }
 
+#greet{
+background-color: rgb(79,85,193) ;
+text-align: center;
+font-weight: semi;
+display: inline-flex;
+align-items: center;
+padding-left: 1rem; /* 4px */
+padding-right: 1rem; /* 4px */
+padding-top: 0.125rem; /* 0.5px */
+padding-bottom: 0.1rem; /* 0.5px */
+font-weight: 600; /* font-semibold */
+transform: rotate(-3deg);
+border-radius: 9999px; /* rounded-full */
+font-size: 17px; /* sm:text-17px */
+background-color: #B3D6F9; /* bg-cool-indigo-100 (adjust the color to match) */
+color: #2F5A86; /* text-cool-indigo-800 (adjust the color to match) */
+margin-top: 2rem; 
+
+}
+
+
+.shakeBox {
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+  }
+  
+  @keyframes shake {
+    0% {
+      transform: rotate(0deg)
+      }
+    25% {
+        transform: rotate(-4deg);
+      }
+    50% {
+        transform: rotate(4deg);
+      }
+    75% {
+        transform: rotate(-4deg);
+      }
+    100% {
+        transform: rotate(0deg);
+      }
+  }
+
 /* Change background header */
 .scroll-header{
     box-shadow: 0 -1px 4px rgba(6, 3, 3, 0.15) ;
@@ -293,6 +337,16 @@ img {
     height: 187px;
     fill:#ffc107;
     transition: fill 2s ease-in-out;
+    position: relative;
+}
+.images {
+    position: absolute; /* Stack images on top of each other */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ensure images fit within the SVG */
+    height: 100%; /* Ensure images fit within the SVG */
+    opacity: 0;
+    transition: opacity 2s ease-in-out; /* Smooth fade effect */
 }
 .home_blob.transitioning{
     fill: hsl(230, 69%, 65%);
@@ -475,14 +529,15 @@ img {
     margin-bottom: var(--mb-2);
 }
 
-.qualification__buttons{
+.qualification__button{
     font-size: var(--h3-font-size) ;
     font-weight: var(--font-medium);
     cursor: pointer;
 }
 
-.qualification__buttons:hover{
-    color: var(--first-color);
+.qualification__button:hover{
+    color: var(--text-color-light);
+    transform: scale(1.1);
 }
 
 .qualification__icon{
@@ -521,12 +576,38 @@ img {
 }
 
 /*==================== PORTFOLIO ====================*/
+.project__tabs{
+    display:flex;
+    justify-content:space-evenly;
+    margin-bottom: var(--mb-2);
+}
+.project__button{
+    font-size: var(--h3-font-size) ;
+    font-weight: var(--font-medium);
+    cursor: pointer;
+}
+
+.project__button:hover{
+    color: var(--first-color);
+}
+
+.project__icon{
+    font-size: 1.8rem;
+    margin-right: var(--mb-0-25);
+}
 .portfolio__container{
     overflow: initial;
 }
 
 .portfolio__content{
+    display: flex;
+    align-items: center; 
+    gap: 1.5rem;
     padding: 0 1.5rem;
+}
+
+#demo-video{
+    background-color: #ffc107;
 }
 
 .portfolio__img{
