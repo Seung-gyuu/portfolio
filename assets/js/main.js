@@ -3,27 +3,25 @@ const navMenu = document.getElementById('nav-menu'),
     navToggle = document.getElementById('nav-toggle'),
     navClose = document.getElementById('nav-close')
 
-startImageTransition();
-
 // menu show 
 // validate if const exists
-if(navToggle){
-    navToggle.addEventListener('click', ()=>{
+if (navToggle) {
+    navToggle.addEventListener('click', () => {
         navMenu.classList.add('show-menu')
     })
 }
 
 // menu hidden
 // validate if const exist
-if(navClose){
-    navClose.addEventListener('click', ()=>{
+if (navClose) {
+    navClose.addEventListener('click', () => {
         navMenu.classList.remove('show-menu')
     })
 }
 
 // remove memu mobile
 const navLink = document.querySelectorAll('.nav__link')
-function linkAction(){
+function linkAction() {
     // const navMenu = document.getElementById('nav-menu')
     // when clicking on each nav__link, remove the show-menu
     navMenu.classList.remove('show-menu')
@@ -33,37 +31,37 @@ navLink.forEach(n => n.addEventListener('click', linkAction))
 
 // accordion skills
 const skillsContent = document.getElementsByClassName('skills__content'),
-      skillsHeader = document.querySelectorAll('.skills__header')
+    skillsHeader = document.querySelectorAll('.skills__header')
 
-function toggleSkills(){
+function toggleSkills() {
     let itemClass = this.parentNode.className
 
-    for(i=0;i<skillsContent.length; i++){
+    for (i = 0; i < skillsContent.length; i++) {
         skillsContent[i].className = 'skills__content skills__close'
     }
-    if(itemClass === 'skills__content skills__close'){
+    if (itemClass === 'skills__content skills__close') {
         this.parentNode.className = 'skills__content skills__open'
     }
 }
 
-skillsHeader.forEach((el)=>{
+skillsHeader.forEach((el) => {
     el.addEventListener('click', toggleSkills)
 })
 
 // qualification tabs
 const tabs = document.querySelectorAll('[data-target]'),
-      tabContents = document.querySelectorAll('[data-content]')
+    tabContents = document.querySelectorAll('[data-content]')
 
-tabs.forEach(tab =>{
-    tab.addEventListener('click', ()=>{
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
         const target = document.querySelector(tab.dataset.target)
 
-        tabContents.forEach(tabContent =>{
+        tabContents.forEach(tabContent => {
             tabContent.classList.remove('qualification__active')
         })
         target.classList.add('qualification__active')
 
-        tabs.forEach(tab =>{
+        tabs.forEach(tab => {
             tab.classList.remove('qualification__active')
         })
         tab.classList.add('qualification__active')
@@ -76,110 +74,70 @@ let swiper = new Swiper(".portfolio__container", {
     loop: true,
 
     navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
     },
     pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
+        el: ".swiper-pagination",
+        clickable: true,
     },
     mousewheel: true,
     keyboard: true,
-  });
-
-/*==================== image transition ====================*/
-
-function startImageTransition() {
-    const images = document.getElementsByClassName("images");
-    const svg = document.querySelector(".home_blob");
-    let curIndex = 0;
- 
-    images[curIndex].style.opacity = 1;
-    setInterval(changeImage, 5000);
-
-    function changeImage() {
-        const curImage = images[curIndex];
-        const nextIndex = (curIndex + 1) % images.length;
-        const nextImage = images[nextIndex];
-        svg.classList.add('transitioning');
-
-        // Change SVG fill color based on the next image
-        if (nextImage.classList.contains('home_blob-img')) {
-            svg.style.fill = '#ffc107'; 
-        } else if (nextImage.classList.contains('home_blob-img2')) {
-            svg.style.fill = 'hsl(230, 69%, 65%)'; 
-        }
-
-        // Fade out the current image
-        curImage.style.opacity = 0;
-        curImage.style.transition = 'opacity 2s ease-in-out';
-
-        setTimeout(() => {
-            nextImage.style.opacity = 1;
-            nextImage.style.transition = 'opacity 2s ease-in-out';
-
-            // Remove transitioning class after transition ends
-            setTimeout(() => {
-                svg.classList.remove('transitioning');
-            }, 1000); // Duration of the transition
-
-        }, 500); 
-
-        curIndex = nextIndex;
-    }
-}
-
+});
 
 /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
 const sections = document.querySelectorAll('section[id]')
 
-function scrollActive(){
+function scrollActive() {
     const scrollY = window.scrollY
 
-    sections.forEach(current =>{
+    sections.forEach(current => {
         const sectionHeight = current.offsetHeight
         const sectionTop = current.offsetTop - 50;
-        sectionId = current.getAttribute('id')
+        const sectionId = current.getAttribute('id');
 
-        if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
-            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active-link')
-        }else{
-            document.querySelector('.nav__menu a[href*='+ sectionId + ']').classList.remove('active-link')
+        const link = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
+        if (link) {
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                link.classList.add('active-link');
+            } else {
+                link.classList.remove('active-link');
+            }
         }
-    })
+    });
 }
 
-window.addEventListener('scroll',scrollActive)
+window.addEventListener('scroll', scrollActive)
 
-/*==================== CHANGE BACKGROUND HEADER ====================*/ 
-function scrollHeader(){
+/*==================== CHANGE BACKGROUND HEADER ====================*/
+function scrollHeader() {
     const nav = document.getElementById('header')
-    if(this.scrollY >= 80) nav.classList.add('scroll-header'); else nav.classList.remove('scroll-header')
+    if (this.scrollY >= 80) nav.classList.add('scroll-header'); else nav.classList.remove('scroll-header')
 }
 window.addEventListener('scroll', scrollHeader)
 
-/*==================== SHOW SCROLL UP ====================*/ 
+/*==================== SHOW SCROLL UP ====================*/
 
-function scrollUp(){
+function scrollUp() {
     const scrollUp = document.getElementById('scroll-up')
-    if(this.scrollY >= 560) scrollUp.classList.add('show-scroll'); else scrollUp.classList.remove('show-scroll')
+    if (this.scrollY >= 560) scrollUp.classList.add('show-scroll'); else scrollUp.classList.remove('show-scroll')
 }
 window.addEventListener('scroll', scrollUp)
 
-/*==================== DARK LIGHT THEME ====================*/ 
+/*==================== DARK LIGHT THEME ====================*/
 const themebutton = document.getElementById('theme-btn')
 const darkTheme = 'dark-theme'
 const iconTheme = 'uil-sun'
 
 const selectedTheme = localStorage.getItem('selected-theme')
-const selectedIcon =localStorage.getItem('selected-icon')
+const selectedIcon = localStorage.getItem('selected-icon')
 
 const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark'
-: 'light'
+    : 'light'
 const getCurrentIcon = () => themebutton.classList.contains(iconTheme) ? 'uil-moon'
-: 'uil-sun'
+    : 'uil-sun'
 
-if(selectedTheme){
+if (selectedTheme) {
     document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
     themebutton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme)
 }
@@ -193,8 +151,8 @@ themebutton.addEventListener('click', () => {
 })
 
 function play_video(id) {
-    var thumbnail = document.getElementById('demo-thumbnail-'+id);
-    var video = document.getElementById('demo-video-'+id);
+    var thumbnail = document.getElementById('demo-thumbnail-' + id);
+    var video = document.getElementById('demo-video-' + id);
 
     // 이미지 숨기고 비디오 보여주기
     thumbnail.style.display = 'none';
