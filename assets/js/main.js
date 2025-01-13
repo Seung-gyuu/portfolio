@@ -63,15 +63,12 @@ tabs.forEach(tab =>{
         })
         target.classList.add('qualification__active')
 
-        tab.forEach(tab =>{
+        tabs.forEach(tab =>{
             tab.classList.remove('qualification__active')
         })
         tab.classList.add('qualification__active')
     })
 })
-
-/*==================== SERVICES MODAL ====================*/
-
 
 /*==================== PORTFOLIO SWIPER  ====================*/
 let swiper = new Swiper(".portfolio__container", {
@@ -137,7 +134,7 @@ function startImageTransition() {
 const sections = document.querySelectorAll('section[id]')
 
 function scrollActive(){
-    const scrollY = window.pageYOffset
+    const scrollY = window.scrollY
 
     sections.forEach(current =>{
         const sectionHeight = current.offsetHeight
@@ -147,7 +144,7 @@ function scrollActive(){
         if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
             document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active-link')
         }else{
-            document.querySelector('.nav__nmenu a[href*='+ sectionId + ']').classList.remove('active-link')
+            document.querySelector('.nav__menu a[href*='+ sectionId + ']').classList.remove('active-link')
         }
     })
 }
@@ -195,9 +192,9 @@ themebutton.addEventListener('click', () => {
     localStorage.setItem('selected-icon', getCurrentIcon())
 })
 
-function play_video() {
-    var thumbnail = document.getElementById('demo-thumbnail');
-    var video = document.getElementById('demo-video');
+function play_video(id) {
+    var thumbnail = document.getElementById('demo-thumbnail-'+id);
+    var video = document.getElementById('demo-video-'+id);
 
     // 이미지 숨기고 비디오 보여주기
     thumbnail.style.display = 'none';
@@ -206,16 +203,5 @@ function play_video() {
 }
 
 
-let shakeBox = document.querySelector('.shakeBox');
 
-const observer = new IntersectionObserver(
-  ([entry]) => {
-    shakeBox.style.animationName = entry.isIntersecting ? "shake" : "none";
-  },
-  {
-    rootMargin: "-250px 0px",
-    threshold: 1,
-  }
-);
 
-observer.observe(shakeBox)
